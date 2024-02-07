@@ -1,6 +1,6 @@
 import logo from "./assets/logo-nlw-expert.svg";
-import NewNodeCard from "./components/new-node-card";
-import NodeCard from "./components/node-card";
+import NewNoteCard from "./components/new-note-card";
+import NoteCard from "./components/note-card";
 
 function App() {
   return (
@@ -19,11 +19,10 @@ function App() {
       <div className="w-full h-px bg-slate-500" />
 
       <div className="grid grid-cols-3 gap-6 auto-rows-[250px]">
-        <NewNodeCard />
-        <NodeCard />
-        <NodeCard />
-        <NodeCard />
-        <NodeCard />
+        <NewNoteCard />
+        <NoteCard />
+        <NoteCard />
+        <NoteCard />
       </div>
     </div>
   );

@@ -1,4 +1,6 @@
-export default function NodeCard() {
+interface INoteCardDta {}
+
+export default function NoteCard() {
   return (
     <div
       className="rounded-md bg-slate-800 p-6 space-y-3 relative  

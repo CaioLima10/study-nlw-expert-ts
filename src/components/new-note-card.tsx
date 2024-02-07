@@ -1,4 +1,4 @@
-export default function NewNodeCard() {
+export default function NewNoteCard() {
   return (
     <div className="rounded-md bg-slate-700 p-6 space-y-3">
       <span className="text-slate-50 text-base font-semibold">

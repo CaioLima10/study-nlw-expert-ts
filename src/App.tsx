@@ -4,22 +4,34 @@ import NewNoteCard from "./components/new-note-card";
 import NoteCard from "./components/note-card";
 
 interface INoteData {
-  id: number;
+  id: string;
   content: string;
   date: Date;
 }
 
 function App() {
-  const [notes, setNotes] = useState<INoteData[]>([]);
+  const [notes, setNotes] = useState<INoteData[]>(() => {
+    const noteOnStorage = localStorage.getItem("notes");
+
+    if (noteOnStorage) {
+      return JSON.parse(noteOnStorage);
+    }
+
+    return [];
+  });
 
   function onNoteCreated(content: string) {
     const newNotes = {
-      id: Math.random(),
+      id: crypto.randomUUID(),
       date: new Date(),
       content: content,
     };
 
-    setNotes([newNotes, ...notes]);
+    const dataNotes = [newNotes, ...notes];
+
+    setNotes(dataNotes);
+
+    localStorage.setItem("notes", JSON.stringify(dataNotes));
   }
 
   return (

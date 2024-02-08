@@ -34,6 +34,8 @@ export default function NewNoteCard({ onNoteCreated }: INewNoteCardData) {
     }
 
     onNoteCreated(content);
+    setContent("");
+    setShouldShowOnBoarding(true);
 
     toast.success("nota criada com sucesso!!");
   }
@@ -92,7 +94,8 @@ export default function NewNoteCard({ onNoteCreated }: INewNoteCardData) {
                   className="flex flex-1 h-full resize-none text-sm leading-6
                 text-slate-400 bg-transparent outline-none"
                   placeholder="Escreva sua nota..."
-                ></textarea>
+                  value={content}
+                />
               )}
             </div>
             <button

@@ -1,8 +1,13 @@
 import * as Dialog from "@radix-ui/react-dialog";
 import { X } from "lucide-react";
 import { ChangeEvent, FormEvent, useState } from "react";
+import { toast } from "sonner";
 
-export default function NewNoteCard() {
+interface INewNoteCardData {
+  onNoteCreated: (content: string) => void;
+}
+
+export default function NewNoteCard({ onNoteCreated }: INewNoteCardData) {
   const [shouldShowOnBoarding, setShouldShowOnBoarding] = useState(true);
   const [content, setContent] = useState("");
 
@@ -23,7 +28,14 @@ export default function NewNoteCard() {
   function handleSaveNote(event: FormEvent) {
     event.preventDefault();
 
-    console.log(content);
+    if (content.length < 3) {
+      toast.error("necessario ter 3 digitos!!");
+      return;
+    }
+
+    onNoteCreated(content);
+
+    toast.success("nota criada com sucesso!!");
   }
 
   return (

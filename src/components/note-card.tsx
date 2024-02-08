@@ -20,7 +20,10 @@ export default function NoteCard({ note: { content, date } }: INoteCardData) {
                     focus-visible:ring-2 focus-visible:ring-lime-400"
       >
         <span className="text-slate-200 text-base font-semibold">
-          {date.toISOString()}
+          {formatDistanceToNowStrict(date, {
+            locale: ptBR,
+            addSuffix: true,
+          })}
         </span>
         <p className="text-slate-400 text-sm leading-6 overflow-hidden text-ellipsis line-clamp-5">
           {content}

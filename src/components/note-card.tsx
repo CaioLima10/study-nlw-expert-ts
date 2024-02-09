@@ -95,7 +95,7 @@ export default function NoteCard({
                   onChange={(e) => setEditedContent(e.target.value)}
                 />
                 <button
-                  className="bg-lime-500 py-4 w-64 fixed bottom-0 right-0 flex items-center justify-center gap-2"
+                  className="bg-lime-500 py-4 w-40 sm:w-56 md:w-64 fixed bottom-0 right-0 flex items-center justify-center gap-2"
                   onClick={handleEditedNote}
                 >
                   Salvar Edição <Check />
@@ -104,7 +104,7 @@ export default function NoteCard({
             ) : (
               <>
                 <button
-                  className="bg-slate-800 py-4 w-64 fixed bottom-0 right-0 text-slate-300 flex items-center justify-center gap-2"
+                  className="bg-slate-800 py-4 w-40 sm:w-56 md:w-64 fixed bottom-0 right-0 text-slate-300 flex items-center justify-center gap-2"
                   onClick={openEditedNote}
                 >
                   Editar{" "}
@@ -118,7 +118,7 @@ export default function NoteCard({
           </div>
           <button
             type="button"
-            className="w-64 fixed bottom-0 text-base py-4 bg-slate-800 text-center text-slate-300 outline-none group"
+            className="w-52 sm:w-56 md:w-64 fixed bottom-0 text-base py-4 bg-slate-800 text-center text-slate-300 outline-none group"
             onClick={() => handleDelete(id)}
           >
             Deseja{" "}

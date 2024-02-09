@@ -45,14 +45,35 @@ function App() {
 
   const noteFiltered = () => {
     if (search !== "") {
-      return notes.filter((note) => note.content.includes(search));
+      return notes.filter((note) =>
+        note.content.toLowerCase().includes(search.toLowerCase())
+      );
     } else {
       return notes;
     }
   };
 
+  function handleNoteDelete(id: string) {
+    const deleteNode = notes.filter((note) => note.id !== id);
+
+    setNotes(deleteNode);
+
+    localStorage.setItem("notes", JSON.stringify(deleteNode));
+  }
+
+  function handleNoteEdit(id: string, newContent: string) {
+    const editedNote = notes.map((note) => {
+      if (note.id === id) {
+        return { ...note, content: newContent };
+      }
+      return note;
+    });
+    setNotes(editedNote);
+    localStorage.setItem("notes", JSON.stringify(editedNote));
+  }
+
   return (
-    <div className="mx-auto max-w-6xl my-12 space-y-6">
+    <div className="mx-auto max-w-6xl my-12 space-y-6 px-5 md:px-0">
       <img src={logo} alt="logo_nlw_expert" className="w-32" />
 
       <form className="w-full">
@@ -68,20 +89,25 @@ function App() {
 
       <div className="w-full h-px bg-slate-500" />
 
-      <div className="grid grid-cols-3 gap-6 auto-rows-[250px]">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 auto-rows-[250px]">
         <NewNoteCard onNoteCreated={onNoteCreated} />
 
-        {(search.length === 0 && (
+        {noteFiltered().length === 0 ? (
+          <div className="flex flex-col w-full items-center justify-center text-slate-500 text-xl space-y-2">
+            <Bird size={110} />
+            <p>Nenhuma anotação encontrada!</p>
+          </div>
+        ) : (
           <>
             {noteFiltered().map((note: INoteData) => (
-              <NoteCard key={note.id} note={note} />
+              <NoteCard
+                key={note.id}
+                note={note}
+                handleNoteDelete={handleNoteDelete}
+                handleNoteEdit={handleNoteEdit}
+              />
             ))}
           </>
-        )) || (
-          <span className="flex flex-col w-full items-center justify-center text-slate-500 text-xl">
-            <Bird size={110} />
-            Nenhuma anotação encontrada!
-          </span>
         )}
       </div>
     </div>
